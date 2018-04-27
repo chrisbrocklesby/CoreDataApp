@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 		
 		//deleteCoreData(entity: "Users", key: "name", value: "Tommy")
 		
-		indexCoreData(entity: "User")
+		indexCoreData(entity: "Users")
 		
 		//getCoreData(entity: "Users", key: "name", value: "Bob")
 	}

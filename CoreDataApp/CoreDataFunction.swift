@@ -5,8 +5,7 @@ import CoreData
 var entityName = ""
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let context = appDelegate.persistentContainer.viewContext
-let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
-let insertData = NSManagedObject(entity: entity!, insertInto: context)
+let entitySet = NSEntityDescription.entity(forEntityName: entityName, in: context)
 let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
 
 
@@ -16,7 +15,9 @@ func insertCoreData(entity: String, key: String, value: String) {
 	entityName = entity
 	
 	/// Insert Data
+	let  insertData = NSManagedObject(entity: entitySet!, insertInto: context)
 	insertData.setValue(value, forKey: key)
+	print("Core Data: Inserted")
 }
 
 
@@ -40,15 +41,15 @@ func saveCoreData(entity: String) {
 func indexCoreData(entity: String) {
 	/// Set Entity of Data
 	entityName = entity
+	
+	/// Request Settings
+	request.returnsObjectsAsFaults = false // Performance Gain
 
 	/// Get All Data for Index
 	do {
-		
-		/// Request Settings
-		request.returnsObjectsAsFaults = false // Performance Gain
-		
-		
+		// Fetch
 		let result = try context.fetch(request)
+		// Loop
 		for object in result as! [NSManagedObject] {
 			print(object.value(forKey: "name") as! String)
 			print(object.value(forKey: "country") as! String)
@@ -71,7 +72,9 @@ func getCoreData(entity: String, key: String, value: String) {
 	
 	/// Get Data based on Request
 	do {
+		// Fetch
 		let result = try context.fetch(request)
+		// Loop
 		for object in result as! [NSManagedObject] {
 			print(object.value(forKey: "name") as! String)
 			print(object.value(forKey: "country") as! String)
@@ -94,7 +97,9 @@ func deleteCoreData(entity: String, key: String, value: String) {
 	
 	/// Delete Data based on Request
 	do {
+		// Fetch
 		let result = try context.fetch(request)
+		// Loop
 		for object in result {
 			context.delete(object as! NSManagedObject)
 		}
