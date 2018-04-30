@@ -6,7 +6,9 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		
 		insertCoreData()
-		getCoreData()
+		getCoreData(entity: "Code") { (response, error) in
+			print(response?.name)
+		}
 	}
 
 }

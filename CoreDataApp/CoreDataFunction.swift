@@ -5,9 +5,10 @@ import CoreData
 
 func insertCoreData(){
 	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-		let toDo = ToDoCoreData(entity: ToDoCoreData.entity(), insertInto: coreData)
-		toDo.name = "Goto Mary"
-		toDo.important = true
+		let setData = ToDoCoreData(entity: ToDoCoreData.entity(), insertInto: coreData)
+		setData.name = "Goto Mary"
+		setData.important = true
+		print("Data Saved...")
 		try? coreData.save()
 	}
 	
@@ -15,12 +16,17 @@ func insertCoreData(){
 
 ///////////////////////// Section /////////////////////////
 
-func getCoreData(){
+func getCoreData(entity: String, completion: @escaping (_ response: ToDoCoreData?, _ error: String?) -> Void = { _,_  in }) {
 	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-		let coreDataToDos = try? coreData.fetch(ToDoCoreData.fetchRequest()) as? [ToDoCoreData]
-			if let theToDos = coreDataToDos {
-				print(theToDos?.last?.name)
-			}
 		
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ToDoCoreData")
+		request.returnsObjectsAsFaults = false // Cache
+		request.predicate = NSPredicate(format: "name = 'Goto Mary'")
+		
+		let result = try? coreData.fetch(request)
+		if let data = result {
+			let response = data.first
+			completion(response as? ToDoCoreData, nil)
+		}
 	}
 }
