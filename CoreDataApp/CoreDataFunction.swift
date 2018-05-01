@@ -1,32 +1,75 @@
 import UIKit
 import CoreData
 
-///////////////////////// Section /////////////////////////
+///////////////////////// Delete Core Data /////////////////////////
 
-func insertCoreData(){
+func deleteCoreData(entity: String, key: String = "", value: String = ""){
 	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
-		let setData = ToDoCoreData(entity: ToDoCoreData.entity(), insertInto: coreData)
-		setData.name = "Goto Mary"
-		setData.important = true
-		print("Data Saved...")
+		
+		/// Request Data from CoreData ///
+		let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+		request.returnsObjectsAsFaults = false // Cache
+		
+		// Add search options to Request
+		if key != "" || value != "" {
+			request.predicate = NSPredicate(format: "\(key) == %@", value)
+		}
+		
+		/// Fetch Results and Delete ///
+		let result = try? coreData.fetch(request)
+		for object in result! {
+			coreData.delete(object as! NSManagedObject)
+			print("Deleted: \(object)")
+		}
+	}
+}
+
+func saveCoreData(){
+	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+	do {
+		try coreData.save()
+		print("Core Data: Saved")
+		
+	} catch {
+		print("Core Data: \(error)")
+	}
+	}
+}
+
+///////////////////////// Insert Core Data /////////////////////////
+
+func insertCoreData(entity: String, key: String = "", value: String = ""){
+	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+		let setEntity = NSEntityDescription.entity(forEntityName: entity, in: coreData)
+		let insert = NSManagedObject(entity: setEntity!, insertInto: coreData)
+		
+		insert.setValue(value, forKey: key)
+		
+		print("Data Saved... \(value)")
 		try? coreData.save()
 	}
 	
 }
 
-///////////////////////// Section /////////////////////////
+///////////////////////// View Core Data /////////////////////////
 
-func getCoreData(entity: String, completion: @escaping (_ response: ToDoCoreData?, _ error: String?) -> Void = { _,_  in }) {
+func viewCoreData(entity: String, key: String = "", value: String = "", completion: @escaping (_ response: [NSDictionary], _ error: String?) -> Void = { _,_  in }) {
+	/// Connect to CoreData ///
 	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
 		
-		let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ToDoCoreData")
+		/// Request Data from CoreData ///
+		let request = NSFetchRequest<NSDictionary>(entityName: entity)
 		request.returnsObjectsAsFaults = false // Cache
-		request.predicate = NSPredicate(format: "name = 'Goto Mary'")
+		request.resultType = .dictionaryResultType // Formats into Dictionary
 		
-		let result = try? coreData.fetch(request)
-		if let data = result {
-			let response = data.first
-			completion(response as? ToDoCoreData, nil)
+		// Add search options to Request
+		if key != "" || value != "" {
+			request.predicate = NSPredicate(format: "\(key) == %@", value)
+		}
+		
+		/// Fetch Results and include in callback ///
+		if let result = try? coreData.fetch(request) {
+			completion(result, nil)
 		}
 	}
 }
