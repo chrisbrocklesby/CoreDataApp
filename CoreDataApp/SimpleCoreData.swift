@@ -11,6 +11,9 @@ func simpleFetch(){
 			let result = try coreData.fetch(request).first
 			print(result?.objectID ?? "Default Value")
 			print(result?.title ?? "Default Value")
+			
+			//let id = result?.objectID
+			//simpleUpdate(objectID: id!)
 		} catch {
 			// Error Handling
 			fatalError("Failed: \(error)")
@@ -81,16 +84,16 @@ func simpleUpdate(objectID: NSManagedObjectID){
 	// Check if Core Data is setup
 	if let coreData = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
 		do {
-			// Request data from Core Data Entity
+			// Request data from Core Data Entity to update
 			let request = NSFetchRequest<MyEntity>(entityName: "MyEntity")
 			request.predicate = NSPredicate(format: "objectID == %@", objectID)
 			
-			// The Result
-			let result = try coreData.fetch(request).first
+			// Result for Update
+			let update = try coreData.fetch(request).first
 			
 			// Set Update Values
-			result?.title = "New Updated Title"
-			result?.post = "Here is the new post content"
+			update?.title = "New Updated Title"
+			update?.post = "Here is the new post content"
 			
 			// Save the Update
 			try coreData.save()
@@ -100,5 +103,6 @@ func simpleUpdate(objectID: NSManagedObjectID){
 		}
 	}
 }
+
 
 

@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 		
 		//simpleUpdate()
 		
-		//simpleFetch()
+		simpleFetch()
 		
 		//simpleInsert()
 		
