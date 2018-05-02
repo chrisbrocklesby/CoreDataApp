@@ -5,7 +5,8 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//insertCoreData(entity: "ToDoCoreData", key: "name", value: "Dog")
+		/*
+		insertCoreData(entity: "ToDoCoreData", key: "name", value: "Dog")
 		
 		deleteCoreData(entity: "ToDoCoreData", key: "name", value: "Goto Mary")
 		
@@ -17,8 +18,16 @@ class ViewController: UIViewController {
 			}
 		}
 		
+		*/
+		//simpleDelete()
 		
+		//simpleUpdate()
 		
+		//simpleFetch()
+		
+		//simpleInsert()
+		
+		simpleFetchIndex()
 		
 		
 	}

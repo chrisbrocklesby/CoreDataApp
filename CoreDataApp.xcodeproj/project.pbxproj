@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51961B362099D42100119C2A /* SimpleCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51961B352099D42100119C2A /* SimpleCoreData.swift */; };
 		5197C9B820930EA80076EEE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5197C9B720930EA80076EEE0 /* AppDelegate.swift */; };
 		5197C9BA20930EA80076EEE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5197C9B920930EA80076EEE0 /* ViewController.swift */; };
 		5197C9BD20930EA80076EEE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5197C9BB20930EA80076EEE0 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51961B352099D42100119C2A /* SimpleCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCoreData.swift; sourceTree = "<group>"; };
 		5197C9B420930EA80076EEE0 /* CoreDataApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5197C9B720930EA80076EEE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5197C9B920930EA80076EEE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				5197C9C620930EA90076EEE0 /* Info.plist */,
 				5197C9BE20930EA80076EEE0 /* CoreDataApp.xcdatamodeld */,
 				5197C9CC20930F0F0076EEE0 /* CoreDataFunction.swift */,
+				51961B352099D42100119C2A /* SimpleCoreData.swift */,
 			);
 			path = CoreDataApp;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				5197C9BA20930EA80076EEE0 /* ViewController.swift in Sources */,
 				5197C9C020930EA80076EEE0 /* CoreDataApp.xcdatamodeld in Sources */,
 				5197C9CD20930F0F0076EEE0 /* CoreDataFunction.swift in Sources */,
+				51961B362099D42100119C2A /* SimpleCoreData.swift in Sources */,
 				5197C9B820930EA80076EEE0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
